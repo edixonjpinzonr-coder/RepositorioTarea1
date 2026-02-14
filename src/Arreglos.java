@@ -48,12 +48,25 @@ public class Arreglos {
                         " \nNota menor: " + notaMenor +"\n"+
                         "\nNota mas repetida: " + notaMasRepetida+"\n"+
                         "\nCuantas notas aprovo: "+notasAprobadas+"\n"+
-                        "\nCuantas notas desaprovo: "+notasDesaprobadas+"\n"+
-                        "\nNotas aprovadas: "+"\n"+mostrarNotasA+"\n"+
-                        "\nNotas desaprovadas: "+"\n"+mostrarNotasD+"\n"+
-                        "\nArreglo con metodo Burbuja: ");
+                        "\nCuantas notas desaprovo: "+notasDesaprobadas+"\n");
+
+
+        // decide si mostrar las notas o si muestra el mensaje
+        if(notasAprobadas>0){
+            System.out.println("Notas aprovadas \n "+ mostrarNotasA+ "\n");
+        }else{
+            System.out.println("No hay notas aprovadas\n ");
+        }
+
+        if(notasDesaprobadas>0){
+            System.out.println("Notas aprovadas \n "+ mostrarNotasD+ "\n");
+        }else{
+            System.out.println("No hay notas desaprovadas\n ");
+        }
+
 
         //metodo para mostrar el arreglo burbuja
+        System.out.println("\nnotas con metodo busrbuja: ");
         for (int i = 0; i < notas.length; i++) {
             System.out.println(notas[i]);
 
