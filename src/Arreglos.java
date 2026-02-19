@@ -3,76 +3,65 @@ import javax.swing.*;
 public class Arreglos {
     public static void main(String[] args) {
 
-        int cantidad = Integer.valueOf(JOptionPane.showInputDialog
-                (null, "ingfese el numero de notas"));
-
+        int cantidad= ingresarCantidad();
         double[] notas = new double[cantidad];
-
-        for(int i=0; i<notas.length; i++){
-            notas[i]= Double.valueOf(JOptionPane.showInputDialog
-                    (null, "ingrese su nota "+(i+1)));
-        }
-
+        double [] nota= ingresarNotas(cantidad, notas);
         System.out.println("\nArreglo ingresado:");
-
-        //metodo para mostrar el arreglo ingresado por el usuario
-        for (int i = 0; i < notas.length; i++) {
-            System.out.println(notas[i]);
-        }
+      mostrarNotasAgregadas(notas);
         //invocacion del metodo burbuja
         ordenarBurbuja(notas);
-
         double notaDefinitiva = calcularNotaDefinitiva(notas);
-
         double notaMayor = determinarNotaMayor(notas);
-
         double notaMenor = determinarNotaMenor(notas);
-
         String notaMasRepetida = determinarNotaMasRepetida(notas);
-
         int notasAprobadas= calcularNotasAprobadas(notas);
-
         int notasDesaprobadas= calcularNotasDesaprobadas(notas);
-
         double[] notasQueAprovo = determinarCualesNotasAprovo( notasAprobadas, notas);
-
         double[] notasQueDesaprovo = determinarCualesNotasDesaprovo( notasDesaprobadas, notas);
-
         String mostrarNotasA = mostrarNotasAprovadas( notasQueAprovo);
-
         String mostrarNotasD = mostrarNotasDesaprovadas( notasQueDesaprovo);
 
-        System.out.println
-                ("\nNota definitiva: " + notaDefinitiva + "\n" +
-                        "\nNota mayor: " + notaMayor +"\n"+
-                        " \nNota menor: " + notaMenor +"\n"+
-                        "\nNota mas repetida: " + notaMasRepetida+"\n"+
-                        "\nCuantas notas aprovo: "+notasAprobadas+"\n"+
-                        "\nCuantas notas desaprovo: "+notasDesaprobadas+"\n");
-
+        mostrarMensajeFinal(notaDefinitiva, notaMayor, notaMenor, notaMasRepetida,
+        notasAprobadas, notasDesaprobadas);
 
         // decide si mostrar las notas o si muestra el mensaje
-        if(notasAprobadas>0){
-            System.out.println("Notas aprovadas \n "+ mostrarNotasA+ "\n");
-        }else{
-            System.out.println("No hay notas aprovadas\n ");
-        }
+        determinarMostrarNotasAprovadas( notasAprobadas, mostrarNotasA);
+        //decide si mostrar las notas desaprovadas o si muestra el mensaje
+        determinarMostrarNotasDesprovadas(notasDesaprobadas,mostrarNotasD);
+        //invocacion del metodo para mostrar el metodo burbuja
+        mostrarMetodoBurbuja(notas);
 
-        if(notasDesaprobadas>0){
-            System.out.println("Notas aprovadas \n "+ mostrarNotasD+ "\n");
-        }else{
-            System.out.println("No hay notas desaprovadas\n ");
-        }
+    }
 
 
-        //metodo para mostrar el arreglo burbuja
-        System.out.println("\nnotas con metodo busrbuja: ");
+    //muestra el mensaje para ingresar la cantidad de notas
+    public static int ingresarCantidad(){
+        int cantidad = Integer.valueOf(JOptionPane.showInputDialog
+                (null, "ingfese el numero de notas"));
+        return cantidad;
+    }
+
+    //muestra el mensaje para ingresar las notas
+    public static double [] ingresarNotas(int cantidad, double [] notas) {
+        double[] nota = new double[cantidad];
         for (int i = 0; i < notas.length; i++) {
-            System.out.println(notas[i]);
+            notas[i] = Double.valueOf(JOptionPane.showInputDialog
+                    (null, "ingrese su nota " + (i + 1)));
+        }
+        return nota;
+    }
 
+    //muestra las notas
+    public static void mostrarNotasAgregadas(double[]notas){
+        //metodo para mostrar el arreglo ingresado por el usuario
+
+        for (int i = 0; i < notas.length; i++) {
+         System.out.println(notas[i]);
         }
 
     }
+
+
     //metodo para calcular cual es la nota definitiva
 
     public static double calcularNotaDefinitiva(double[] notas) {
@@ -215,6 +204,24 @@ public class Arreglos {
         return notas;
     }
 
+    // decide si mostrar las notas o si muestra el mensaje
+    public static void determinarMostrarNotasAprovadas(int notasAprobadas, String mostrarNotasA){
+        if(notasAprobadas>0){
+            System.out.println("Notas aprovadas \n"+mostrarNotasA+ "\n");
+        }else{
+            System.out.println("No hay notas aprovadas\n ");
+        }
+    }
+
+
+    public static void determinarMostrarNotasDesprovadas(int notasDesprobadas, String mostrarNotasD){
+        if(notasDesprobadas>0){
+            System.out.println("Notas aprovadas \n"+mostrarNotasD);
+        }else{
+            System.out.println("No hay notas aprovadas\n ");
+        }
+    }
+
 
     //notas por medio del metodo burbuja
     public static void ordenarBurbuja(double [] notas){
@@ -232,4 +239,26 @@ public class Arreglos {
 
     }
 
+    //metodo para mostrar el metodo burbuja
+    public static void mostrarMetodoBurbuja(double[] notas){
+        System.out.println("\nnotas con metodo busrbuja: ");
+        for (int i = 0; i < notas.length; i++) {
+            System.out.println(notas[i]);
+
+        }
+    }
+
+    public static void mostrarMensajeFinal
+            (double notaDefinitiva,double notaMayor,double notaMenor,String notaMasRepetida,
+             int notasAprobadas, int notasDesaprobadas){
+
+        System.out.println("\nNota definitiva: " + notaDefinitiva + "\n" +
+                "\nNota mayor: " + notaMayor +"\n"+
+                " \nNota menor: " + notaMenor +"\n"+
+                "\nNota mas repetida: " + notaMasRepetida+"\n"+
+                "\nCuantas notas aprovo: "+notasAprobadas+"\n"+
+                "\nCuantas notas desaprovo: "+notasDesaprobadas+"\n");
+
+    }
 }
+
